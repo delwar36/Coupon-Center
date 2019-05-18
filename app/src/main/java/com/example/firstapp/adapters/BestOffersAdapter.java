@@ -47,10 +47,11 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
 
         BestItemModel dataModel = recyclerdata.get(position);
         holder.name.setText(dataModel.getTitle());
-        holder.description.setText(dataModel.getDescription());
+        holder.description.setText(dataModel.getCategory());
+        holder.url.setText(dataModel.getUrl());
 
         Picasso.with(mContext)
-                .load(dataModel.getThumb())
+                .load(dataModel.getThumbnail())
                 .into(holder.thumbnail);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +61,10 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
                 TextView textView1 = v.findViewById(R.id.bestOfferDetails);
                 TextView textView2 = v.findViewById(R.id.offerCategory);
                 ImageView imageView = v.findViewById(R.id.thumbnail);
+                TextView url = v.findViewById(R.id.urlHolder);
 
+
+                String offerUrl = url.getText().toString();
                 String bestCat = textView2.getText().toString();
 
                 String cname = textView.getText().toString();
@@ -71,6 +75,7 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
                 intent.putExtra("cName", cname);
                 intent.putExtra("bDetails", details);
                 intent.putExtra("cate", bestCat);
+                intent.putExtra("url", offerUrl);
 
                 imageView.buildDrawingCache();
                 Bitmap bitmap = imageView.getDrawingCache();
@@ -101,7 +106,7 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView name, description, cashback, pick, varified;
+        TextView name, description, cashback, pick, varified, url;
         ImageView thumbnail;
         View mView;
 
@@ -110,7 +115,9 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
             mView = itemView;
             name = itemView.findViewById(R.id.proName);
             description = itemView.findViewById(R.id.offerCategory);
+            url = itemView.findViewById(R.id.urlHolder);
             thumbnail = itemView.findViewById(R.id.thumbnail);
+
 
             cashback = itemView.findViewById(R.id.cdOffer);
             pick = itemView.findViewById(R.id.editors);

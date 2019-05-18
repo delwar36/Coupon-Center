@@ -1,48 +1,28 @@
 package com.example.firstapp.models;
 
-
 public class BestItemModel {
+    private String thumbnail;
 
-    public String title;
-    public String description;
-    public String id;
-    public String thumb;
-    public String url;
+    private String category;
 
+    private String title;
 
-    public BestItemModel() {
+    private String url;
 
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public BestItemModel(String title, String description, String thumb, String url) {
-        this.title = title;
-        this.description = description;
-        this.thumb = thumb;
-        this.url = url;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
-    public String getUrl() {
-        return url;
+    public String getCategory() {
+        return category;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTitle() {
@@ -53,11 +33,12 @@ public class BestItemModel {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
 }

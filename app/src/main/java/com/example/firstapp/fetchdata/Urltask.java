@@ -54,8 +54,9 @@ public class Urltask extends AsyncTask<String, String, List<BestItemModel>> {
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 BestItemModel articleModel = new BestItemModel();
                 articleModel.setTitle(finalObject.getString("title"));
-                articleModel.setDescription(finalObject.getString("category"));
-                articleModel.setThumb(finalObject.getString("thumbnail"));
+                articleModel.setCategory(finalObject.getString("category"));
+                articleModel.setThumbnail(finalObject.getString("thumbnail"));
+                articleModel.setUrl(finalObject.getString("url"));
                 // adding the final object in the list
                 articleModelList.add(articleModel);
             }
