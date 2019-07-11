@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity
         builder.setTitle("No Internet Connection");
         builder.setMessage("Connect to mobile data or Wifi connection.");
 
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -323,7 +323,6 @@ public class MainActivity extends AppCompatActivity
                 ActivityCompat.finishAffinity(MainActivity.this);
             }
         });
-
         return builder;
     }
 }
