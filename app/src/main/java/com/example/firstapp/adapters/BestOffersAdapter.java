@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.firstapp.activities.OfferDetailsActivity;
 import com.example.firstapp.activities.R;
 import com.example.firstapp.models.BestItemModel;
@@ -102,7 +101,13 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
 
     @Override
     public int getItemCount() {
-        return recyclerdata.size();
+        try {
+            return recyclerdata.size();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     class MyHolder extends RecyclerView.ViewHolder {

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.firstapp.activities.R;
 import com.example.firstapp.adapters.BestOffersAdapter;
 import com.example.firstapp.fetchdata.Urltask;
@@ -34,10 +33,13 @@ public class BestOffersFragment extends Fragment {
         @Override
         protected void onPostExecute(List<BestItemModel> dataModels) {
             super.onPostExecute(dataModels);
+
             BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), dataModels);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(recyclerviewAdapter);
         }
     }
+
+
 }

@@ -1,4 +1,5 @@
 package com.example.firstapp.activities;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity{
                             }
                             else {
                                 progressDialog.dismiss();
-                                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Invalid Credential", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -112,15 +112,18 @@ public class LoginActivity extends AppCompatActivity{
         userName = mUser.getText().toString();
         userPass = mPass.getText().toString();
 
+        MainActivity main = new MainActivity();
+
         if(userName.isEmpty() || userPass.isEmpty()){
             Toast.makeText(this,"Please enter all the details", Toast.LENGTH_SHORT).show();
         }else if (userName.equalsIgnoreCase("Admin") && userPass.equalsIgnoreCase("Admin")){
             result = 2;
         }else if (userPass.length()<6) {
             Toast.makeText(this, "Password should be 6 characters or more", Toast.LENGTH_SHORT).show();
-        }
+        } else if (!main.isConnected(this)) {
+            main.buildDialog(this).show();
 
-        else {
+        } else {
             result = 1;
         }
         return result;

@@ -2,9 +2,7 @@ package com.example.firstapp.fetchdata;
 
 
 import android.os.AsyncTask;
-
 import com.example.firstapp.models.BestItemModel;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,17 +65,6 @@ public class Urltask extends AsyncTask<String, String, List<BestItemModel>> {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
