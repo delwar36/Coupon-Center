@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.firstapp.fragments.ApprovedFragment;
 import com.example.firstapp.fragments.PendingFragment;
 import com.example.firstapp.fragments.UsersFragment;
@@ -56,36 +55,14 @@ public class AdminPanelActivity extends AppCompatActivity
 
         proNavigationView.setNavigationItemSelectedListener(this);
 
-        viewPagerAdmin = (ViewPager)findViewById(R.id.admin_viewpager);
+        viewPagerAdmin = findViewById(R.id.admin_viewpager);
         if (viewPagerAdmin != null){
             setupViewPager(viewPagerAdmin);
         }
 
 
-
-
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayoutAdmin);
-        tabLayout.setupWithViewPager(viewPagerAdmin);
-
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPagerAdmin.setCurrentItem(tab.getPosition());
-                viewPagerAdmin.getVerticalScrollbarPosition();
-            }
-
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        TabLayout tabLayout = findViewById(R.id.tabLayoutAdmin);
+        MainActivity.tabActions(tabLayout, viewPagerAdmin);
     }
     public void bottomArrow(View v) {
 

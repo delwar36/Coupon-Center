@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.firstapp.fragments.BestOffersFragment;
 import com.example.firstapp.fragments.CatFragment;
 import com.example.firstapp.fragments.TopFragment;
@@ -45,6 +44,29 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser user;
 
 
+    static void tabActions(TabLayout tabLayout, final ViewPager viewPager) {
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                viewPager.getVerticalScrollbarPosition();
+            }
+
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,27 +115,7 @@ public class MainActivity extends AppCompatActivity
 
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
-
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                viewPager.getVerticalScrollbarPosition();
-            }
-
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        tabActions(tabLayout, viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {

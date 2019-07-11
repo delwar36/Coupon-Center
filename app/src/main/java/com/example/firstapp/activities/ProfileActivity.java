@@ -40,13 +40,13 @@ public class ProfileActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        Toolbar toolbar2 = (Toolbar) findViewById(R.id.proToolbar);
+        Toolbar toolbar2 = findViewById(R.id.proToolbar);
         setSupportActionBar(toolbar2);
 
 
         proNavigationView = findViewById(R.id.nav_viewPro);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layoutPro);
+        DrawerLayout drawer = findViewById(R.id.drawer_layoutPro);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -55,36 +55,14 @@ public class ProfileActivity extends AppCompatActivity
         proNavigationView.setNavigationItemSelectedListener(this);
 
 
-        viewPagerpro = (ViewPager)findViewById(R.id.pro_viewpager);
+        viewPagerpro = findViewById(R.id.pro_viewpager);
         if (viewPagerpro != null){
             setupViewPager(viewPagerpro);
         }
 
 
-
-
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayoutPro);
-        tabLayout.setupWithViewPager(viewPagerpro);
-
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPagerpro.setCurrentItem(tab.getPosition());
-                viewPagerpro.getVerticalScrollbarPosition();
-            }
-
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        TabLayout tabLayout = findViewById(R.id.tabLayoutPro);
+        MainActivity.tabActions(tabLayout, viewPagerpro);
     }
 
     private void setupViewPager(ViewPager viewPager) {
