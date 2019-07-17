@@ -315,12 +315,12 @@ public class MainActivity extends AppCompatActivity
         builder.setTitle("No Internet Connection");
         builder.setMessage("Connect to mobile data or Wifi connection.");
 
-        builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                ActivityCompat.finishAffinity(MainActivity.this);
+                finish();
+                startActivity(getIntent());
             }
         });
         return builder;
