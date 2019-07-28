@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 import com.example.firstapp.activities.R;
 import com.example.firstapp.adapters.BestOffersAdapter;
 import com.example.firstapp.fetchdata.Urltask;
@@ -34,7 +34,6 @@ public class BestOffersFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
                 new Viewdata().execute("https://gist.githubusercontent.com/delwar36/4c70788de39565039bbaed32c6988b99/raw/690ba2af2910be5be43d53284db2578ffa3201f7/gistfile1.txt");
             }
         });
