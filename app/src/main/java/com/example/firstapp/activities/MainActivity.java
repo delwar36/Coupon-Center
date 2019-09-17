@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.example.firstapp.fragments.BestOffersFragment;
 import com.example.firstapp.fragments.CatFragment;
 import com.example.firstapp.fragments.TopFragment;
@@ -268,7 +269,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));

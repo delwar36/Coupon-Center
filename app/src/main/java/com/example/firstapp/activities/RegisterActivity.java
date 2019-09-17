@@ -1,9 +1,9 @@
 package com.example.firstapp.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -21,6 +24,8 @@ public class RegisterActivity extends AppCompatActivity{
     private TextView logBackTxt;
     private EditText userName, userEmail, userPassword;
     private FirebaseAuth firebaseAuth;
+    String name, password, email;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,11 @@ public class RegisterActivity extends AppCompatActivity{
         setupViews();
         getSupportActionBar();
 
+
         firebaseAuth = FirebaseAuth.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,12 +47,19 @@ public class RegisterActivity extends AppCompatActivity{
                     //Upload data to database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+
+
+                    final String fName = userName.getText().toString();
+                    final String uEmail = userEmail.getText().toString();
+
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(),"Account is created",Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                writeNewUser(fName, uEmail, firebaseAuth.getUid());
+                                firebaseAuth.signOut();
                             }
                             else {
                                 Toast.makeText(getApplicationContext(),"Registration failed",Toast.LENGTH_SHORT).show();
@@ -64,11 +80,13 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     private boolean validate() {
-        Boolean result = false;
 
-        String name = userName.getText().toString();
-        String password = userPassword.getText().toString();
-        String email = userEmail.getText().toString();
+        boolean result = false;
+
+        name = userName.getText().toString();
+        password = userPassword.getText().toString();
+        email = userEmail.getText().toString();
+
 
         if(name.isEmpty() || password.isEmpty() || email.isEmpty()){
             Toast.makeText(this,"Please enter all the details", Toast.LENGTH_SHORT).show();
@@ -88,6 +106,29 @@ public class RegisterActivity extends AppCompatActivity{
         userPassword = findViewById(R.id.etUserPassword);
         regButton = findViewById(R.id.signUpButton);
         logBackTxt = findViewById(R.id.logInback);
+    }
+
+    private void writeNewUser(String name, String email, String userId) {
+        User user = new User(name, email);
+
+        mDatabase.child("Users").child(userId).setValue(user);
+    }
+
+    @IgnoreExtraProperties
+    public class User {
+
+        public String name;
+        public String email;
+
+        public User() {
+            // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        }
+
+        public User(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
+
     }
 
 
