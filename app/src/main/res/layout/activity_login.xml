@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     tools:context=".Activities.LoginActivity">
 
 
@@ -67,7 +67,7 @@
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/question"
         android:text="Sign Up"
-        android:textColor="#0099ff"
+        android:textColor="#00FFB7"
         android:textSize="16sp"
         android:textStyle="bold" />
 

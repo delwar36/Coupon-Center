@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
@@ -14,6 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            tools:replace="android:launchMode" />
+
+        <meta-data
+            android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+            android:value="com.google.firebase.components.ComponentRegistrar" />
+        <meta-data
+            android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+            android:value="com.google.firebase.components.ComponentRegistrar" />
+        <meta-data
+            android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+            android:value="com.google.firebase.components.ComponentRegistrar" />
+
+        <service android:name="com.google.firebase.components.ComponentDiscoveryService" />
+
         <activity
             android:name=".WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
