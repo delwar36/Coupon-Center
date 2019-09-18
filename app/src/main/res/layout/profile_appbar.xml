@@ -56,24 +56,24 @@
                     android:src="@mipmap/ic_launcher_round" />
 
                 <TextView
-                    android:id="@+id/headName"
+                    android:id="@+id/profName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="30dp"
-                    android:text="Md Delwar Hossain"
+                    android:text="@string/nav_header_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/headEmail"
+                    android:id="@+id/profEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
-                    android:text="delwarh543@gmail.com"
+                    android:text="@string/nav_header_subtitle"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
