@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -19,17 +20,25 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstapp.classes.User;
 import com.example.firstapp.fragments.BestOffersFragment;
 import com.example.firstapp.fragments.CatFragment;
 import com.example.firstapp.fragments.TopFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderLayout;
@@ -48,6 +57,9 @@ public class MainActivity extends AppCompatActivity
     ImageView bottomBtn;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+    private DatabaseReference mDatabase;
+
+    private TextView hName, hEmail;
 
 
     static void tabActions(TabLayout tabLayout, final ViewPager viewPager) {
@@ -212,7 +224,35 @@ public class MainActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = navigationView.getHeaderView(0);
 
+        hName = header.findViewById(R.id.headName);
+        hEmail = header.findViewById(R.id.headEmail);
+
+        String userId = firebaseAuth.getUid();
+        assert userId != null;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                assert user != null;
+                hName.setText(user.name);
+                hEmail.setText(user.email);
+                Log.w("RETRIEVED", user.name + " " + user.email);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("FAILED", "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(MainActivity.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         viewPager = findViewById(R.id.tab_viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);

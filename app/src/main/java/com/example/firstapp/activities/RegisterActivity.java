@@ -10,13 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firstapp.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -110,25 +110,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     private void writeNewUser(String name, String email, String userId) {
         User user = new User(name, email);
-
         mDatabase.child("Users").child(userId).setValue(user);
-    }
-
-    @IgnoreExtraProperties
-    public class User {
-
-        public String name;
-        public String email;
-
-        public User() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        }
-
-        public User(String name, String email) {
-            this.name = name;
-            this.email = email;
-        }
-
     }
 
 
