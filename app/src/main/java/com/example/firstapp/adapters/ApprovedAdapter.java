@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.firstapp.activities.R;
 import com.example.firstapp.fragments.ApprovedFragment;
@@ -59,7 +58,7 @@ public class ApprovedAdapter extends RecyclerView.Adapter<ApprovedAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "You clicked " + getValueAt(position), Toast.LENGTH_SHORT).show();
+
             }
         });
         ImageView image1;
