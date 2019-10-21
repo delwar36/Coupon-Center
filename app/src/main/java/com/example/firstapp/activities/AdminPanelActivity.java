@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,13 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.firstapp.adapters.ViewPagerAdapter;
 import com.example.firstapp.fragments.ApprovedFragment;
 import com.example.firstapp.fragments.PendingFragment;
 import com.example.firstapp.fragments.UsersFragment;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminPanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,6 +60,7 @@ public class AdminPanelActivity extends AppCompatActivity
         TabLayout tabLayout = findViewById(R.id.tabLayoutAdmin);
         MainActivity.tabActions(tabLayout, viewPagerAdmin);
     }
+
     public void bottomArrow(View v) {
 
     }
@@ -76,37 +73,6 @@ public class AdminPanelActivity extends AppCompatActivity
         adapter.addFrag(new ApprovedFragment(), "Rejected");
         viewPager.setAdapter(adapter);
     }
-
-
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager){
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title){
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position){
-            return mFragmentTitleList.get(position);
-        }
-    }
-
 
 
     int ext =0;

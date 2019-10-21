@@ -25,6 +25,14 @@ public class OfferDetailsActivity extends AppCompatActivity {
         tool = findViewById(R.id.offerDetailsToolbar);
 
         setSupportActionBar(tool);
+        tool.setNavigationIcon(R.drawable.go_back);
+        tool.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
 
         Intent intent = getIntent();
 
