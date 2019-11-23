@@ -4,9 +4,9 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/addAcc"
+        <item android:id="@+id/addAff"
             android:icon="@drawable/add"
-            android:title="Add Account"/>
+            android:title="Add Affiliate"/>
         <item android:id="@+id/manageAcc"
             android:icon="@drawable/manage"
             android:title="Manage Account"/>

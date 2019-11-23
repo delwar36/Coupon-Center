@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <EditText
+        android:id="@+id/aff_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:padding="5dp"
+        android:background="#daffffff"
+        android:hint="Title"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/aff_category"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/aff_title"
+        android:layout_marginTop="15dp"
+        android:background="#daffffff"
+        android:padding="5dp"
+        android:hint="Category"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/aff_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_below="@+id/aff_category"
+        android:layout_marginTop="15dp"
+        android:background="#daffffff"
+        android:hint="Thumbnail Link"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/aff_url"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_below="@+id/aff_thumbnail"
+        android:layout_marginTop="15dp"
+        android:background="#daffffff"
+        android:hint="URL"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/aff_offer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_below="@+id/aff_url"
+        android:layout_marginTop="15dp"
+        android:background="#daffffff"
+        android:hint="Offer Title"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="text"/>
+
+
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@+id/aff_offer"
+        android:layout_margin="20dp"
+        android:background="#03b903"
+        android:focusable="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:layout_centerInParent="true"/>
+
+
+
+
+</RelativeLayout>

@@ -48,6 +48,7 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
         holder.name.setText(dataModel.getTitle());
         holder.description.setText(dataModel.getCategory());
         holder.url.setText(dataModel.getUrl());
+        holder.offerDetails.setText(dataModel.getOffer());
 
         Picasso.with(mContext)
                 .load(dataModel.getThumbnail())
@@ -111,7 +112,7 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView name, description, cashback, pick, varified, url;
+        TextView name, description, cashback, pick, varified, url, offerDetails;
         ImageView thumbnail;
         View mView;
 
@@ -122,6 +123,7 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
             description = itemView.findViewById(R.id.offerCategory);
             url = itemView.findViewById(R.id.urlHolder);
             thumbnail = itemView.findViewById(R.id.thumbnail);
+            offerDetails = itemView.findViewById(R.id.bestOfferDetails);
 
 
             cashback = itemView.findViewById(R.id.cdOffer);

@@ -9,6 +9,22 @@ public class BestItemModel {
 
     private String url;
 
+    private String offer;
+
+    public BestItemModel(){
+
+    }
+
+
+
+    public BestItemModel(String thumbnail, String category, String title, String url, String offer) {
+        this.thumbnail = thumbnail;
+        this.category = category;
+        this.title = title;
+        this.url = url;
+        this.offer = offer;
+    }
+
     public String getThumbnail() {
         return thumbnail;
     }
@@ -39,6 +55,14 @@ public class BestItemModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getOffer() {
+        return offer;
+    }
+
+    public void setOffer(String offer) {
+        this.offer = offer;
     }
 
 }
