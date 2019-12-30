@@ -45,57 +45,60 @@ public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.My
     public void onBindViewHolder(MyHolder holder, int position) {
 
         BestItemModel dataModel = recyclerdata.get(position);
-        holder.name.setText(dataModel.getTitle());
-        holder.description.setText(dataModel.getCategory());
-        holder.url.setText(dataModel.getUrl());
-        holder.offerDetails.setText(dataModel.getOffer());
+        if (dataModel!=null){
+            holder.name.setText(dataModel.getTitle());
+            holder.description.setText(dataModel.getCategory());
+            holder.url.setText(dataModel.getUrl());
+            holder.offerDetails.setText(dataModel.getOffer());
 
-        Picasso.with(mContext)
-                .load(dataModel.getThumbnail())
-                .into(holder.thumbnail);
+            Picasso.with(mContext)
+                    .load(dataModel.getThumbnail())
+                    .into(holder.thumbnail);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView textView = v.findViewById(R.id.proName);
-                TextView textView1 = v.findViewById(R.id.bestOfferDetails);
-                TextView textView2 = v.findViewById(R.id.offerCategory);
-                ImageView imageView = v.findViewById(R.id.thumbnail);
-                TextView url = v.findViewById(R.id.urlHolder);
-
-
-                String offerUrl = url.getText().toString();
-                String bestCat = textView2.getText().toString();
-
-                String cname = textView.getText().toString();
-                String details = textView1.getText().toString();
-                Intent intent = new Intent(mContext, OfferDetailsActivity.class);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView textView = v.findViewById(R.id.proName);
+                    TextView textView1 = v.findViewById(R.id.bestOfferDetails);
+                    TextView textView2 = v.findViewById(R.id.offerCategory);
+                    ImageView imageView = v.findViewById(R.id.thumbnail);
+                    TextView url = v.findViewById(R.id.urlHolder);
 
 
-                intent.putExtra("cName", cname);
-                intent.putExtra("bDetails", details);
-                intent.putExtra("cate", bestCat);
-                intent.putExtra("url", offerUrl);
+                    String offerUrl = url.getText().toString();
+                    String bestCat = textView2.getText().toString();
 
-                imageView.buildDrawingCache();
-                Bitmap bitmap = imageView.getDrawingCache();
+                    String cname = textView.getText().toString();
+                    String details = textView1.getText().toString();
+                    Intent intent = new Intent(mContext, OfferDetailsActivity.class);
 
-                intent.putExtra("picture", bitmap);
 
-                mContext.startActivity(intent);
+                    intent.putExtra("cName", cname);
+                    intent.putExtra("bDetails", details);
+                    intent.putExtra("cate", bestCat);
+                    intent.putExtra("url", offerUrl);
+
+                    imageView.buildDrawingCache();
+                    Bitmap bitmap = imageView.getDrawingCache();
+
+                    intent.putExtra("picture", bitmap);
+
+                    mContext.startActivity(intent);
+                }
+            });
+
+            if (position % 3 == 0) {
+
+                holder.cashback.setVisibility(View.VISIBLE);
+                holder.pick.setVisibility(View.VISIBLE);
+                holder.varified.setVisibility(View.VISIBLE);
+            } else {
+
+                holder.cashback.setVisibility(View.GONE);
+                holder.pick.setVisibility(View.GONE);
+                holder.varified.setVisibility(View.GONE);
             }
-        });
 
-        if (position % 3 == 0) {
-
-            holder.cashback.setVisibility(View.VISIBLE);
-            holder.pick.setVisibility(View.VISIBLE);
-            holder.varified.setVisibility(View.VISIBLE);
-        } else {
-
-            holder.cashback.setVisibility(View.GONE);
-            holder.pick.setVisibility(View.GONE);
-            holder.varified.setVisibility(View.GONE);
         }
 
     }

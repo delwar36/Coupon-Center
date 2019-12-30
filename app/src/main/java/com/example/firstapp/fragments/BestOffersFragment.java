@@ -2,19 +2,25 @@ package com.example.firstapp.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.firstapp.activities.R;
 import com.example.firstapp.adapters.BestOffersAdapter;
-import com.example.firstapp.fetchdata.Urltask;
 import com.example.firstapp.models.BestItemModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +36,7 @@ public class BestOffersFragment extends Fragment {
 
     public SwipeRefreshLayout swipeRefreshLayout;
     private DatabaseReference mDatabase;
-    private List<BestItemModel> items;
+    private List<BestItemModel> items, filteItems;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +50,6 @@ public class BestOffersFragment extends Fragment {
 
         getAffiliateList();
 
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -55,6 +60,70 @@ public class BestOffersFragment extends Fragment {
 
         return rootView;
 
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView)MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String s) {
+                if (!TextUtils.isEmpty(s.trim())){
+                    searchUsers(s);
+
+                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            //new Viewdata().execute("https://gist.githubusercontent.com/delwar36/4c70788de39565039bbaed32c6988b99/raw/690ba2af2910be5be43d53284db2578ffa3201f7/gistfile1.txt");
+                            searchUsers(s);
+                        }
+                    });
+                } else {
+                    getAffiliateList();
+
+                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            //new Viewdata().execute("https://gist.githubusercontent.com/delwar36/4c70788de39565039bbaed32c6988b99/raw/690ba2af2910be5be43d53284db2578ffa3201f7/gistfile1.txt");
+                            getAffiliateList();
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void getAffiliateList() {
@@ -76,9 +145,9 @@ public class BestOffersFragment extends Fragment {
                     BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), items);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
-                      if (swipeRefreshLayout.isRefreshing()) {
-                          swipeRefreshLayout.setRefreshing(false);
-                      }
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
                     recyclerView.setAdapter(recyclerviewAdapter);
 
                 }
@@ -95,21 +164,64 @@ public class BestOffersFragment extends Fragment {
 
     }
 
+    private void searchUsers(final String query) {
+        try{
+            filteItems  = new ArrayList<>();
+            mDatabase.child("offers").addValueEventListener(new ValueEventListener() {
+                BestItemModel aff;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot affSnapshot: dataSnapshot.getChildren()){
+                        aff =  affSnapshot.getValue(BestItemModel.class);
+                        BestItemModel modelData;
+                        if (aff != null && (aff.getTitle().toLowerCase().contains(query.toLowerCase())||
+                                aff.getCategory().toLowerCase().contains(query.toLowerCase()))) {
+                            modelData = new BestItemModel(aff.getThumbnail(), aff.getCategory(),
+                                    aff.getTitle(), aff.getUrl(), aff.getOffer());
+                            filteItems.add(modelData);
+                        }
 
-    public class Viewdata extends Urltask {
-        @Override
-        protected void onPostExecute(List<BestItemModel> dataModels) {
-            super.onPostExecute(dataModels);
+                        Log.i("LIST", aff.getTitle().contains(query.toLowerCase())? aff.getTitle():query);
 
-            BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), dataModels);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-            recyclerView.setLayoutManager(layoutManager);
-            if (swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-            recyclerView.setAdapter(recyclerviewAdapter);
+                    }
+
+                    BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), filteItems);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    recyclerView.setLayoutManager(layoutManager);
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                    recyclerView.setAdapter(recyclerviewAdapter);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(getContext(), "Data retrieve failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e){
+            Log.i("DATA", e.toString());
+
         }
+
     }
+
+    //
+//    public class Viewdata extends Urltask {
+//        @Override
+//        protected void onPostExecute(List<BestItemModel> dataModels) {
+//            super.onPostExecute(dataModels);
+//
+//            BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), dataModels);
+//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+//            recyclerView.setLayoutManager(layoutManager);
+//            if (swipeRefreshLayout.isRefreshing()) {
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//            recyclerView.setAdapter(recyclerviewAdapter);
+//        }
+//    }
 
 
 }
