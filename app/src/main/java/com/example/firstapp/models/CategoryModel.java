@@ -2,31 +2,42 @@ package com.example.firstapp.models;
 
 public class CategoryModel {
 
-    private String Title;
-    private String Category;
-    private String Description;
-    private int Thumvnail;
+    private String title;
+    private String category;
+    private String thumbnail;
 
-    public CategoryModel(int thumvnail, String title) {
-        Title = title;
-        Thumvnail = thumvnail;
+    public CategoryModel(){
+
     }
 
+    public CategoryModel(String title, String category, String thumbnail) {
+        this.title = title;
+        this.category = category;
+        this.thumbnail = thumbnail;
+    }
 
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
-    public int getThumvnail() {
-        return Thumvnail;
+    public String getCategory() {
+        return category;
     }
 
-    public void setThumvnail(int thumvnail) {
-        Thumvnail = thumvnail;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

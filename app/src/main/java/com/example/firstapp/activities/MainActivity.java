@@ -61,98 +61,7 @@ public class MainActivity extends AppCompatActivity
 
     private List<BestItemModel> items;
 
-    static void tabActions(TabLayout tabLayout, final ViewPager viewPager) {
-        tabLayout.setupWithViewPager(viewPager);
 
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                viewPager.getVerticalScrollbarPosition();
-            }
-
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-    }
-
-    private int finish = 0;
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new BestOffersFragment(), "Best Offers");
-        adapter.addFrag(new CatFragment(), "Categories");
-        adapter.addFrag(new TopFragment(), "Top Stories");
-        viewPager.setAdapter(adapter);
-    }
-
-    public void openProfile(View v){
-        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-    }
-
-    public void bottomArrow(View v) {
-        counter++;
-        if (counter%2==1) {
-            navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.manage_account);
-        } else {
-
-            navigationView.getMenu().clear();
-            navigationView.inflateMenu(R.menu.activity_main_drawer);
-        }
-
-
-    }
-
-    private void setSliderViews() {
-
-        for (int i = 1; i <= 6; i++) {
-
-
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-
-            switch (i) {
-                case 1:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aa.png?alt=media&token=d951a21f-2e0c-407d-a99e-b58ce3ca668a");
-                    break;
-                case 2:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1a.png?alt=media&token=1dfc5f0e-0e9f-4983-86c4-a73b8b89cbf0");
-                    break;
-                case 3:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
-                    break;
-                case 4:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaaa.png?alt=media&token=05a59df4-3376-45c5-b4f2-00798d3a71e2");
-                    break;
-                case 5:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
-                    break;
-
-                case 6:
-                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaaaaaaa.png?alt=media&token=570265c1-035c-495d-beb5-1dae84158ae2");
-                    break;
-            }
-
-            sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(SliderView sliderView) {
-                    startActivity(new Intent(getApplicationContext(), OfferDetailsActivity.class));
-                }
-            });
-
-            //at last add this view in your layout :
-            sliderLayout.addSliderView(sliderView);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +140,115 @@ public class MainActivity extends AppCompatActivity
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabActions(tabLayout, viewPager);
     }
+
+    static void tabActions(TabLayout tabLayout, final ViewPager viewPager) {
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                viewPager.getVerticalScrollbarPosition();
+            }
+
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private int finish = 0;
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new BestOffersFragment(), "Best Offers");
+        adapter.addFrag(new CatFragment(), "Categories");
+        adapter.addFrag(new TopFragment(), "Top Stories");
+        viewPager.setAdapter(adapter);
+    }
+
+    public void openProfile(View v){
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+    }
+
+    public void bottomArrow(View v) {
+        counter++;
+        if (counter%2==1) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.manage_account);
+        } else {
+
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.activity_main_drawer);
+        }
+
+
+    }
+
+    private void setSliderViews() {
+
+
+
+        for (int i = 1; i <= 10; i++) {
+
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+
+
+            switch (i) {
+                case 1:
+                    sliderView.setImageUrl("https://i0.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEI_56783050.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1");
+                    break;
+                case 2:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1a.png?alt=media&token=1dfc5f0e-0e9f-4983-86c4-a73b8b89cbf0");
+                    break;
+                case 3:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
+                    break;
+                case 4:
+                    sliderView.setImageUrl("https://i0.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEI_56783050.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1");
+                    break;
+                case 5:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
+                    break;
+                case 6:
+                    sliderView.setImageUrl("https://i0.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEI_56783050.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1");
+                    break;
+                case 7:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1a.png?alt=media&token=1dfc5f0e-0e9f-4983-86c4-a73b8b89cbf0");
+                    break;
+                case 8:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
+                    break;
+                case 9:
+                    sliderView.setImageUrl("https://i0.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEI_56783050.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1");
+                    break;
+                case 10:
+                    sliderView.setImageUrl("https://firebasestorage.googleapis.com/v0/b/omnibit-772ae.appspot.com/o/1aaaa.png?alt=media&token=89783e81-f6ed-4846-9c3e-43de8947814f");
+                    break;
+
+
+            }
+
+            sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(SliderView sliderView) {
+                    startActivity(new Intent(getApplicationContext(), OfferDetailsActivity.class));
+                }
+            });
+
+            //at last add this view in your layout :
+            sliderLayout.addSliderView(sliderView);
+        }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -248,7 +266,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")

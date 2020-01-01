@@ -36,7 +36,7 @@ public class BestOffersFragment extends Fragment {
 
     public SwipeRefreshLayout swipeRefreshLayout;
     private DatabaseReference mDatabase;
-    private List<BestItemModel> items, filteItems;
+    private List<BestItemModel> items, filterItems;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class BestOffersFragment extends Fragment {
 
     private void searchUsers(final String query) {
         try{
-            filteItems  = new ArrayList<>();
+            filterItems = new ArrayList<>();
             mDatabase.child("offers").addValueEventListener(new ValueEventListener() {
                 BestItemModel aff;
                 @Override
@@ -178,14 +178,14 @@ public class BestOffersFragment extends Fragment {
                                 aff.getCategory().toLowerCase().contains(query.toLowerCase()))) {
                             modelData = new BestItemModel(aff.getThumbnail(), aff.getCategory(),
                                     aff.getTitle(), aff.getUrl(), aff.getOffer());
-                            filteItems.add(modelData);
+                            filterItems.add(modelData);
                         }
 
                         Log.i("LIST", aff.getTitle().contains(query.toLowerCase())? aff.getTitle():query);
 
                     }
 
-                    BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), filteItems);
+                    BestOffersAdapter recyclerviewAdapter = new BestOffersAdapter(getContext(), filterItems);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(layoutManager);
                     if (swipeRefreshLayout.isRefreshing()) {

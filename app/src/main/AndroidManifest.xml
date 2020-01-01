@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".CategorizedActivity"></activity>
         <activity android:name=".AddAffiliateActivity" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
