@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser user;
     private DatabaseReference mDatabase;
 
-    private TextView hName, hEmail;
+    private TextView hName, hEmail, balance;
 
     private List<BestItemModel> items;
 
@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity
 
         hName = header.findViewById(R.id.headName);
         hEmail = header.findViewById(R.id.headEmail);
+        balance = header.findViewById(R.id.balance);
+
+        balance.setText("\u09F3"+"20");
 
         String userId = firebaseAuth.getUid();
         assert userId != null;

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class BestOffersAdapter extends RecyclerView.Adapter<BestOffersAdapter.MyHolder> {
 
-    List<BestItemModel> recyclerdata;
+    private List<BestItemModel> recyclerdata;
     private Context mContext;
 
 

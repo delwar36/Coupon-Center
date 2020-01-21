@@ -54,6 +54,7 @@
 
 
     <TextView
+        android:id="@+id/balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -61,8 +62,9 @@
         android:background="@drawable/capsule"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="$0"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="\u09F3"
         android:textColor="@android:color/white"
         android:textSize="16sp"/>
 

@@ -9,9 +9,9 @@
         app:actionViewClass="android.support.v7.widget.SearchView" />
     <item
         android:id="@+id/balance"
-        android:icon="@drawable/dollar"
-        app:showAsAction="always"
-        android:title="Balance"/>
+        app:showAsAction="ifRoom"
+        android:textStyle="bold"
+        android:title="\u09F3"/>
 
     <item
         android:id="@+id/action_notify"

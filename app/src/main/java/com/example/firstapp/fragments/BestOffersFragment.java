@@ -76,6 +76,10 @@ public class BestOffersFragment extends Fragment {
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
 
+        MenuItem balnce = menu.findItem(R.id.balance);
+
+        balnce.setTitle("\u09F3"+"20");
+
         SearchView searchView = (SearchView)MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -122,6 +126,7 @@ public class BestOffersFragment extends Fragment {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         return super.onOptionsItemSelected(item);
     }
