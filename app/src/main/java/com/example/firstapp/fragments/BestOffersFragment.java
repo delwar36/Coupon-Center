@@ -137,6 +137,7 @@ public class BestOffersFragment extends Fragment {
             mDatabase.child("offers").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    items.clear();
                     for (DataSnapshot affSnapshot: dataSnapshot.getChildren()){
                         BestItemModel aff =  affSnapshot.getValue(BestItemModel.class);
                         BestItemModel modelData = null;

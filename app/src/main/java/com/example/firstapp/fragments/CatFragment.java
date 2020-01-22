@@ -54,10 +54,14 @@ public class CatFragment extends Fragment {
         dbRef.child("offers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                categories.clear();
                 for (DataSnapshot affSnapshot : dataSnapshot.getChildren()) {
                     CategoryModel aff = affSnapshot.getValue(CategoryModel.class);
+
                     categories.add(aff);
                 }
+
+
 
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(new CatRecyclerViewAdapter(getContext(), categories));

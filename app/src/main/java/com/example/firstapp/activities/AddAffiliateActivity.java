@@ -56,14 +56,21 @@ public class AddAffiliateActivity extends AppCompatActivity {
 
         BestItemModel affiliate = new BestItemModel(thumbnail, category, title, url, offer);
 
-        mDatabase.child("offers").push().setValue(affiliate).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                startActivity(new Intent(getApplicationContext(), AdminPanelActivity.class));
-                Toast.makeText(AddAffiliateActivity.this, "New Data Added Successfully", Toast.LENGTH_SHORT).show();
+        if (title.isEmpty() || category.isEmpty() || thumbnail.isEmpty() || url.isEmpty() || offer.isEmpty()){
+            Toast.makeText(AddAffiliateActivity.this, "Fill up all data please", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+        } else {
+            mDatabase.child("offers").push().setValue(affiliate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    Toast.makeText(AddAffiliateActivity.this, "New Data Added Successfully", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+
+
 
     }
 }

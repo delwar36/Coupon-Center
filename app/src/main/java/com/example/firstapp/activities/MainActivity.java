@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(getApplicationContext(), AddAffiliateActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
         } else if (id == R.id.nav_refer) {
 
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if( id == R.id.addAff){
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), AddAffiliateActivity.class));
         }else if(id == R.id.logout) {
             firebaseAuth.signOut();
             finish();
