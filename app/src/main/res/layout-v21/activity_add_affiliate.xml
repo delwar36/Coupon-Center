@@ -19,6 +19,8 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:padding="10dp"
+            android:buttonTint="@android:color/white"
+            android:checked="true"
             android:layout_margin="10dp"
             android:onClick="clickedRadioButton"
             android:text="Offer" />
@@ -26,6 +28,7 @@
             android:id="@+id/bannerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/white"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:onClick="clickedRadioButton"
@@ -37,11 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="clickedRadioButton"
+            android:buttonTint="@android:color/white"
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:text="Category"/>
 
     </RadioGroup>
+
 
     <EditText
         android:id="@+id/aff_get_cate"
@@ -50,8 +55,8 @@
         android:padding="5dp"
         android:background="#daffffff"
         android:hint="Category"
-        android:textSize="18sp"
         android:visibility="gone"
+        android:textSize="18sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:inputType="text"/>
@@ -62,7 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <EditText
             android:id="@+id/aff_title"
             android:layout_width="match_parent"
@@ -126,7 +130,12 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:inputType="text"/>
+
     </LinearLayout>
+
+
+
+
 
 
     <Button
